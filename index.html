@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? ❤️</title>
+    <style>
+        body {
+            background-color: #ffeff2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        #container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #gif-container img {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute; /* Needed for the jumping effect */
+            left: 150px; /* Initial offset from center */
+        }
+
+        .success-text {
+            display: none;
+            color: #d63384;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: pop 0.5s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="main-content">
+            <div id="gif-container">
+                <img id="puppy-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYxcDNoZzR6bmN6Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/qUIm586IB2z4I/giphy.gif" alt="Puppy Eyes">
+            </div>
+            <h1 id="question">Will you be my Valentine?</h1>
+            
+            <div class="buttons" id="btn-wrapper">
+                <button id="yesBtn">Yes! ❤️</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="success-msg" class="success-text">YAY! See you tomorrow! 🥰</div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const puppyGif = document.getElementById('puppy-gif');
+        const mainContent = document.getElementById('main-content');
+        const successMsg = document.getElementById('success-msg');
+
+        // The "No" Button Evasion Logic
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        // The "Yes" Button Click Logic
+        yesBtn.addEventListener('click', () => {
+            mainContent.style.display = 'none';
+            successMsg.style.display = 'block';
+            
+            // Change GIF to celebratory puppy
+            const celebrationGif = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYxcDNoZzR6bmN6Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxV5R8BvWgw/giphy.gif";
+            
+            // Re-using the container for the final GIF
+            const finalGif = document.createElement('img');
+            finalGif.src = celebrationGif;
+            finalGif.style.width = "300px";
+            finalGif.style.marginTop = "20px";
+            finalGif.style.borderRadius = "15px";
+            document.getElementById('container').appendChild(finalGif);
+        });
+    </script>
+</body>
+</html>
+
